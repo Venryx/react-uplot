@@ -1,0 +1,14 @@
+{
+	"typescript.tsdk": "./node_modules/typescript/lib",
+	"javascript.preferences.quoteStyle": "double",
+	"typescript.preferences.quoteStyle": "double",
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+	],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	}
+}

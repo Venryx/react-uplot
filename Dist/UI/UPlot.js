@@ -3,7 +3,8 @@ import uPlot from "uplot";
 import "uplot/dist/uPlot.min.css";
 import { E } from "../Utils/FromJSVE";
 export const UPlot = React.memo((p) => {
-    const divRef = useRef(null);
+    var _a;
+    const divRef = (_a = p.divRef) !== null && _a !== void 0 ? _a : useRef(null);
     useEffect(() => {
         const chart = new uPlot(p.options, p.data, divRef.current);
         if (p.chartRef)
@@ -13,7 +14,7 @@ export const UPlot = React.memo((p) => {
                 p.chartRef.current = null;
             chart.destroy();
         };
-    }, [p.data, p.options, p.chartRef]);
+    }, [p.data, p.options, p.chartRef, divRef]);
     const randomID = `id_${Math.random().toString().replace(".", "")}`;
     const div = (React.createElement("div", { ref: divRef, style: E({ width: "100%", height: "100%" }, p.placeLegendBelowContainer && { height: "calc(100% + 33px)", pointerEvents: "none" }) }));
     if (p.placeLegendBelowContainer) {

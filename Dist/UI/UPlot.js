@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import uPlot from "uplot";
 import "uplot/dist/uPlot.min.css";
-import { E } from "../Utils/FromJSVE";
+import { Assert, E } from "../Utils/FromJSVE";
 export const UPlot = React.memo((p) => {
     var _a;
     const divRef = (_a = p.divRef) !== null && _a !== void 0 ? _a : useRef(null);
+    Assert(p.data == null || p.data.every(a => { var _a; return a.length == ((_a = p.data[0]) === null || _a === void 0 ? void 0 : _a.length); }), () => `All data-arrays must have the same length. Got lengths: ${p.data.map(a => a.length).join(",")}`);
     useEffect(() => {
+        //debugger;
         const chart = new uPlot(p.options, p.data, divRef.current);
         if (p.chartRef)
             p.chartRef.current = chart;

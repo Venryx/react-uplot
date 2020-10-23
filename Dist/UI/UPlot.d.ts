@@ -6,5 +6,5 @@ export declare const UPlot: React.MemoExoticComponent<(p: {
     chartRef?: React.MutableRefObject<uPlot | null>;
     options: uPlot.Options;
     data: uPlot.AlignedData;
-    placeLegendBelowContainer: boolean;
+    placeLegendBelowContainer?: boolean;
 }) => JSX.Element>;

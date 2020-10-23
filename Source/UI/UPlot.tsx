@@ -1,16 +1,18 @@
 import React, {useEffect, useRef} from "react";
 import uPlot from "uplot";
 import "uplot/dist/uPlot.min.css";
-import {E} from "../Utils/FromJSVE";
+import {Assert, E} from "../Utils/FromJSVE";
 
 export const UPlot = React.memo((p: {
 	divRef?: React.RefObject<HTMLDivElement>, chartRef?: React.MutableRefObject<uPlot|null>,
 	options: uPlot.Options, data: uPlot.AlignedData,
-	placeLegendBelowContainer: boolean,
+	placeLegendBelowContainer?: boolean,
 })=>{
 	const divRef = p.divRef ?? useRef<HTMLDivElement>(null);
+	Assert(p.data == null || p.data.every(a=>a.length == p.data[0]?.length), ()=>`All data-arrays must have the same length. Got lengths: ${p.data.map(a=>a.length).join(",")}`);
 
 	useEffect(()=>{
+		//debugger;
 		const chart = new uPlot(p.options, p.data, divRef.current!);
 		if (p.chartRef) p.chartRef.current = chart;
 		return ()=>{

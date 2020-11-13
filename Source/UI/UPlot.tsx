@@ -8,13 +8,13 @@ export const UPlot = React.memo((props: {
 	options: uPlot.Options, data: uPlot.AlignedData,
 	placeLegendBelowContainer?: boolean,
 })=>{
-	let {divRef, chartRef, options, data, placeLegendBelowContainer} = props; // annoying, but needed to prevent memory leak (see: https://github.com/facebook/react/issues/18790#issuecomment-726394247)
+	// destructuring is pretty redundant (vs props.X), but is a step toward avoiding the memory-leak of data/options (see: https://github.com/facebook/react/issues/18790#issuecomment-726394247)
+	let {divRef, chartRef, options, data, placeLegendBelowContainer} = props;
 	divRef = divRef ?? useRef<HTMLDivElement>(null);
 	Assert(data == null || data.every(a=>a.length == data[0]?.length), ()=>`All data-arrays must have the same length. Got lengths: ${data.map(a=>a.length).join(",")}`);
 
 	const deps = [data, options, chartRef, divRef];
 	useEffect(()=>{
-		//debugger;
 		let chart: uPlot|null = new uPlot(options, data, divRef!.current!);
 		if (chartRef) chartRef.current = chart;
 		return ()=>{
@@ -39,7 +39,6 @@ export const UPlot = React.memo((props: {
 		};
 	//}, [data, options, chartRef, divRef]);
 	}, deps);
-	//}, [p.options, p.chartRef, divRef]);
 
 	const randomID = `id_${Math.random().toString().replace(".", "")}`;
 

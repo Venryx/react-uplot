@@ -3,12 +3,12 @@ import uPlot from "uplot";
 import "uplot/dist/uPlot.min.css";
 import { Assert, E } from "../Utils/FromJSVE";
 export const UPlot = React.memo((props) => {
-    let { divRef, chartRef, options, data, placeLegendBelowContainer } = props; // annoying, but needed to prevent memory leak (see: https://github.com/facebook/react/issues/18790#issuecomment-726394247)
+    // destructuring is pretty redundant (vs props.X), but is a step toward avoiding the memory-leak of data/options (see: https://github.com/facebook/react/issues/18790#issuecomment-726394247)
+    let { divRef, chartRef, options, data, placeLegendBelowContainer } = props;
     divRef = divRef !== null && divRef !== void 0 ? divRef : useRef(null);
     Assert(data == null || data.every(a => { var _a; return a.length == ((_a = data[0]) === null || _a === void 0 ? void 0 : _a.length); }), () => `All data-arrays must have the same length. Got lengths: ${data.map(a => a.length).join(",")}`);
     const deps = [data, options, chartRef, divRef];
     useEffect(() => {
-        //debugger;
         let chart = new uPlot(options, data, divRef.current);
         if (chartRef)
             chartRef.current = chart;
@@ -34,7 +34,6 @@ export const UPlot = React.memo((props) => {
         };
         //}, [data, options, chartRef, divRef]);
     }, deps);
-    //}, [p.options, p.chartRef, divRef]);
     const randomID = `id_${Math.random().toString().replace(".", "")}`;
     const div = (React.createElement("div", { ref: divRef, style: E({ width: "100%", height: "100%" }, placeLegendBelowContainer && { height: "calc(100% + 33px)", pointerEvents: "none" }) }));
     if (placeLegendBelowContainer) {

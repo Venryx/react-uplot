@@ -19,19 +19,18 @@ export const UPlot = React.memo((props) => {
             chart = null;
             // this is "improper", but it's the only easy way I know to solve all versions of the leak reliably! (ie. not knowing react-tree above this comp)
             // (Note: In debug mode, the memory leak occurs even with this hack, through "_debugOwner" prop. In prod mode, the hack below is... almost sufficient, though. [updateQueue go away!])
-            try {
-                options = null;
-                data = null;
-                divRef = null;
-                chartRef = null;
-                deps.length = 0;
-                props.options = null;
-                props.data = null;
-            }
-            catch (ex) {
+            //try {
+            options = null;
+            data = null;
+            divRef = null;
+            chartRef = null;
+            deps.length = 0;
+            /*	props.options = null as any;
+                props.data = null as any;
+            } catch (ex) {
                 // typically, props object is frozen, so hack won't work -- this catch-block ignores the error
                 // hack is still useful in my own projects, where I disable Object.freeze: https://stackoverflow.com/a/39253443/2441655
-            }
+            }*/
         };
         //}, [data, options, chartRef, divRef]);
     }, deps);

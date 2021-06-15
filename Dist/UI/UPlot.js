@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import uPlot from "uplot";
 import "uplot/dist/uPlot.min.css";
-import { Assert, E } from "../Utils/FromJSVE";
+import { Assert, E } from "../Utils/FromJSVE.js";
 export const UPlot = React.memo((props) => {
     // destructuring is pretty redundant (vs props.X), but is a step toward avoiding the memory-leak of data/options (see: https://github.com/facebook/react/issues/18790#issuecomment-726394247)
     let { divRef, chartRef, options, data, placeLegendBelowContainer } = props;

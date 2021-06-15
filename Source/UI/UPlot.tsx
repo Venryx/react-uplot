@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from "react";
 import uPlot from "uplot";
 import "uplot/dist/uPlot.min.css";
-import {Assert, E} from "../Utils/FromJSVE";
+import {Assert, E} from "../Utils/FromJSVE.js";
 
 export const UPlot = React.memo((props: {
 	divRef?: React.RefObject<HTMLDivElement>, chartRef?: React.MutableRefObject<uPlot|null>,

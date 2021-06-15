@@ -1,1 +1,1 @@
-export * from "./UI/UPlot";
+export * from "./UI/UPlot.js";

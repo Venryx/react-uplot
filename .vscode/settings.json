@@ -1,5 +1,7 @@
 {
 	"typescript.tsdk": "./node_modules/typescript/lib",
+	"typescript.preferences.importModuleSpecifierEnding": "js",
+	"javascript.preferences.importModuleSpecifierEnding": "js",
 	"javascript.preferences.quoteStyle": "double",
 	"typescript.preferences.quoteStyle": "double",
 	"eslint.validate": [

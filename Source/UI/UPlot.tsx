@@ -6,10 +6,10 @@ import {Assert, E} from "../Utils/FromJSVE.js";
 export const UPlot = React.memo((props: {
 	divRef?: React.RefObject<HTMLDivElement>, chartRef?: React.MutableRefObject<uPlot|null>,
 	options: uPlot.Options, data: uPlot.AlignedData,
-	placeLegendBelowContainer?: boolean,
+	placeLegendBelowContainer?: boolean, ignoreDoubleClick?: boolean,
 })=>{
 	// destructuring is pretty redundant (vs props.X), but is a step toward avoiding the memory-leak of data/options (see: https://github.com/facebook/react/issues/18790#issuecomment-726394247)
-	let {divRef, chartRef, options, data, placeLegendBelowContainer} = props;
+	let {divRef, chartRef, options, data, placeLegendBelowContainer, ignoreDoubleClick} = props;
 	divRef = divRef ?? useRef<HTMLDivElement>(null);
 	Assert(data == null || data.every(a=>a.length == data[0]?.length), ()=>`All data-arrays must have the same length. Got lengths: ${data.map(a=>a.length).join(",")}`);
 
@@ -17,6 +17,14 @@ export const UPlot = React.memo((props: {
 	useEffect(()=>{
 		let chart: uPlot|null = new uPlot(options, data, divRef!.current!);
 		if (chartRef) chartRef.current = chart;
+
+		if (ignoreDoubleClick && divRef?.current && !divRef.current["dblClickIgnoreSet"]) {
+			divRef.current["dblClickIgnoreSet"] = true;
+			divRef.current.addEventListener("dblclick", e=>{
+				e.stopPropagation();
+			}, {capture: true});
+		}
+
 		return ()=>{
 			if (chartRef) chartRef.current = null;
 			chart!.destroy();

@@ -4,8 +4,9 @@ import "uplot/dist/uPlot.min.css";
 import { Assert, E } from "../Utils/FromJSVE.js";
 export const UPlot = React.memo((props) => {
     // destructuring is pretty redundant (vs props.X), but is a step toward avoiding the memory-leak of data/options (see: https://github.com/facebook/react/issues/18790#issuecomment-726394247)
-    let { divRef, chartRef, options, data, placeLegendBelowContainer, ignoreDoubleClick } = props;
-    divRef = divRef !== null && divRef !== void 0 ? divRef : useRef(null);
+    let { divRef: _divRef_passed, chartRef, options, data, placeLegendBelowContainer, ignoreDoubleClick } = props;
+    const _divRefCandidate = useRef(null);
+    let divRef = _divRef_passed !== null && _divRef_passed !== void 0 ? _divRef_passed : _divRefCandidate;
     Assert(data == null || data.every(a => { var _a; return a.length == ((_a = data[0]) === null || _a === void 0 ? void 0 : _a.length); }), () => `All data-arrays must have the same length. Got lengths: ${data.map(a => a.length).join(",")}`);
     const deps = [data, options, chartRef, divRef];
     useEffect(() => {

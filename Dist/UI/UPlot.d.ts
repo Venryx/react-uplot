@@ -8,4 +8,4 @@ export declare const UPlot: React.MemoExoticComponent<(props: {
     data: uPlot.AlignedData;
     placeLegendBelowContainer?: boolean;
     ignoreDoubleClick?: boolean;
-}) => JSX.Element>;
+}) => React.JSX.Element>;

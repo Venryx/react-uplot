@@ -9,8 +9,9 @@ export const UPlot = React.memo((props: {
 	placeLegendBelowContainer?: boolean, ignoreDoubleClick?: boolean,
 })=>{
 	// destructuring is pretty redundant (vs props.X), but is a step toward avoiding the memory-leak of data/options (see: https://github.com/facebook/react/issues/18790#issuecomment-726394247)
-	let {divRef, chartRef, options, data, placeLegendBelowContainer, ignoreDoubleClick} = props;
-	divRef = divRef ?? useRef<HTMLDivElement>(null);
+	let {divRef: _divRef_passed, chartRef, options, data, placeLegendBelowContainer, ignoreDoubleClick} = props;
+	const _divRefCandidate = useRef<HTMLDivElement>(null);
+	let divRef = _divRef_passed ?? _divRefCandidate;
 	Assert(data == null || data.every(a=>a.length == data[0]?.length), ()=>`All data-arrays must have the same length. Got lengths: ${data.map(a=>a.length).join(",")}`);
 
 	const deps = [data, options, chartRef, divRef];

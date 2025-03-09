@@ -1,7 +1,7 @@
 {
   "name": "react-uplot",
   "description": "ReactJS wrapper for the uPlot charting library.",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Venryx (https://venryx.com)",
   "main": "Dist/index.js",
   "typings": "Dist/index.d.ts",
@@ -22,20 +22,20 @@
     "dist": "tsc"
   },
   "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "uplot": "^1.0.0"
   },
   "devDependencies": {
-    "@types/react": "17.0.9",
+    "@types/react": "^19.0.0",
     "eslint": "^7.28.0",
     "eslint-config-vbase": "^1.0.11",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-only-warn": "^1.0.2",
     "eslint-plugin-react": "^7.24.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "typescript": "^4.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.8.2",
     "uplot": "^1.6.12"
   },
   "dependencies": {}

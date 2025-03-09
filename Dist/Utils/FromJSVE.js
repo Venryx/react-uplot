@@ -10,7 +10,7 @@ export function ToJSON(obj) { return JSON.stringify(obj); }
 export function FromJSON(json) { return JSON.parse(json); }
 export function RemoveDuplicates(items) {
     var result = [];
-    for (let item of items) {
+    for (const item of items) {
         if (result.indexOf(item) == -1) {
             result.push(item);
         }
@@ -22,9 +22,9 @@ export function Assert(condition, messageOrMessageFunc) {
         return;
     var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
     //console.log(`Assert failed) ${message}\n\nStackTrace) ${GetStackTraceStr()}`);
-    console.error("Assert failed) " + message);
+    console.error(`Assert failed) ${message}`);
     debugger;
-    throw new Error("Assert failed) " + message);
+    throw new Error(`Assert failed) ${message}`);
 }
 export function AssertWarn(condition, messageOrMessageFunc) {
     if (condition)
@@ -37,7 +37,7 @@ function IsString(obj) { return typeof obj == "string"; }
 export function Clone(obj, keepPrototype = false) {
     if (obj == null)
         return obj;
-    let result = FromJSON(ToJSON(obj));
+    const result = FromJSON(ToJSON(obj));
     if (keepPrototype == true) {
         Object.setPrototypeOf(result, Object.getPrototypeOf(obj));
     }
